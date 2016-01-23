@@ -24,6 +24,7 @@
 
 @property (nonatomic) UILabel *initialsLabel;
 @property (nonatomic) NSURLSessionDownloadTask *downloadTask;
+@property (nonatomic) CGFloat radiusOverride;
 
 @end
 
@@ -119,6 +120,15 @@ NSString *const ATLAvatarImageViewAccessibilityLabel = @"ATLAvatarImageViewAcces
         self.image = nil;
         self.initialsLabel.text = avatarItem.avatarInitials;
     }
+
+    
+    if ([avatarItem respondsToSelector:@selector(avatarRadius)]) {
+        self.radiusOverride = avatarItem.avatarRadius;
+        if (self.radiusOverride > 0) {
+            self.layer.cornerRadius = self.radiusOverride;
+        }
+    }
+    
     _avatarItem = avatarItem;
 }
 
@@ -136,7 +146,7 @@ NSString *const ATLAvatarImageViewAccessibilityLabel = @"ATLAvatarImageViewAcces
 
 - (void)setAvatarImageViewDiameter:(CGFloat)avatarImageViewDiameter
 {
-    self.layer.cornerRadius = avatarImageViewDiameter / 2;
+    self.layer.cornerRadius = (self.radiusOverride == 0) ? avatarImageViewDiameter / 2 : self.radiusOverride;
     _avatarImageViewDiameter = avatarImageViewDiameter;
     [self invalidateIntrinsicContentSize];
 }

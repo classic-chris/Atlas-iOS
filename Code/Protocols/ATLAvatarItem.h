@@ -42,4 +42,11 @@
  */
 @property (nonatomic, readonly) NSString *avatarInitials;
 
+@optional
+/**
+ @abstract Returns the avatar image radius for display. 0 makes this the default circle.
+ */
+@property (nonatomic, readonly) CGFloat avatarRadius;
+
+
 @end
