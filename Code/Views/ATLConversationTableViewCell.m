@@ -185,9 +185,12 @@ static CGFloat const ATLChevronIconViewRightPadding = 14.0f;
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    CGFloat radius = [self.conversationImageView.avatarItem avatarRadius];
+    radius = (radius == 0) ? CGRectGetHeight(self.conversationImageView.frame) / 2 : radius;
 
     self.separatorInset = UIEdgeInsetsMake(0, CGRectGetMinX(self.conversationTitleLabel.frame), 0, 0);
-    self.conversationImageView.layer.cornerRadius = CGRectGetHeight(self.conversationImageView.frame) / 2;
+    self.conversationImageView.layer.cornerRadius = radius;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
