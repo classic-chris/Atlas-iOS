@@ -135,6 +135,8 @@ NSInteger const kATLSharedCellTag = 1000;
     self.accessibilityLabel = [NSString stringWithFormat:@"Message: %@", text];
 }
 
+
+// MARK: CPD updated this method to overcome issues wiht Atlas images in the wrong bubbles...
 - (void)configureBubbleViewForImageContent
 {
     self.accessibilityLabel = ATLImageAccessibilityLabel;
@@ -177,6 +179,7 @@ NSInteger const kATLSharedCellTag = 1000;
             size = ATLImageSizeForData(fullResImagePart.data); // Resort to image's size, if no dimensions metadata message parts found.
         }
         
+        
         // Fall-back to programatically requesting for a content download of single message part messages (Android compatibillity).
         if ([[weakSelf.message valueForKeyPath:@"parts.MIMEType"] isEqual:@[ATLMIMETypeImageJPEG]]) {
             if (fullResImagePart && (fullResImagePart.transferStatus == LYRContentTransferReadyForDownload)) {
@@ -192,11 +195,18 @@ NSInteger const kATLSharedCellTag = 1000;
                 [weakSelf.bubbleView updateProgressIndicatorWithProgress:1.0 visible:NO animated:YES];
             }
         }
-        if (weakSelf.message != previousMessage) {
-            return;
-        }
+        
+        
+// MARK: IMAGE BUBBLE MOVED HERE           `dispatch_async(dispatch_get_main_queue(), ^{`
         
         dispatch_async(dispatch_get_main_queue(), ^{
+
+            if (weakSelf.message != previousMessage) {
+                return;
+            }
+
+// MARK: IMAGE BUBBLE MOVED            `dispatch_async(dispatch_get_main_queue(), ^{`
+
             [weakSelf.bubbleView updateWithImage:displayingImage width:size.width];
         });
     });
