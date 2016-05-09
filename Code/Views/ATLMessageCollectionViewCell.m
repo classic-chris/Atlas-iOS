@@ -196,17 +196,10 @@ NSInteger const kATLSharedCellTag = 1000;
             }
         }
         
-        
-// MARK: IMAGE BUBBLE MOVED HERE           `dispatch_async(dispatch_get_main_queue(), ^{`
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-
             if (weakSelf.message != previousMessage) {
                 return;
             }
-
-// MARK: IMAGE BUBBLE MOVED            `dispatch_async(dispatch_get_main_queue(), ^{`
-
             [weakSelf.bubbleView updateWithImage:displayingImage width:size.width];
         });
     });
@@ -265,7 +258,7 @@ NSInteger const kATLSharedCellTag = 1000;
     }
     __weak typeof(self) weakSelf = self;
     __block LYRMessage *previousMessage = weakSelf.message;
-    
+
     dispatch_async(self.imageProcessingConcurrentQueue, ^{
         if (previewImagePart.fileURL) {
             displayingImage = ATLAnimatedImageWithAnimatedGIFURL(previewImagePart.fileURL);
@@ -274,7 +267,7 @@ NSInteger const kATLSharedCellTag = 1000;
         }
         
         CGSize size = CGSizeZero;
-        LYRMessagePart *sizePart = ATLMessagePartForMIMEType(self.message, ATLMIMETypeImageSize);
+        LYRMessagePart *sizePart = ATLMessagePartForMIMEType(weakSelf.message, ATLMIMETypeImageSize);
         if (sizePart) {
             size = ATLImageSizeForJSONData(sizePart.data);
             size = ATLConstrainImageSizeToCellSize(size);
@@ -303,15 +296,13 @@ NSInteger const kATLSharedCellTag = 1000;
                     [weakSelf.bubbleView updateProgressIndicatorWithProgress:progress.fractionCompleted visible:YES animated:NO];
                     [weakSelf.bubbleView updateWithImage:displayingImage width:size.width];
                 } else {
-                    dispatch_async(weakSelf.imageProcessingConcurrentQueue, ^{
-                        displayingImage = ATLAnimatedImageWithAnimatedGIFData(fullResImagePart.data);
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            if (weakSelf.message != previousMessage) {
-                                return;
-                            }
-                            [weakSelf.bubbleView updateProgressIndicatorWithProgress:1.0 visible:NO animated:YES];
-                            [weakSelf.bubbleView updateWithImage:displayingImage width:size.width];
-                        });
+                    displayingImage = ATLAnimatedImageWithAnimatedGIFData(fullResImagePart.data);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (weakSelf.message != previousMessage) {
+                            return;
+                        }
+                        [weakSelf.bubbleView updateProgressIndicatorWithProgress:1.0 visible:NO animated:YES];
+                        [weakSelf.bubbleView updateWithImage:displayingImage width:size.width];
                     });
                 }
             }
