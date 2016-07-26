@@ -1,5 +1,30 @@
 # Atlas Changelog
 
+## 1.0.26
+
+### Bug Fixes
+
+* Fix of the conversation list query in the `ATLConversationListViewController`. [APPS-2506]
+
+## 1.0.25
+
+### Enhancements
+
+* Upgraded `LayerKit` to version `0.22.0`. Due to breaking API changes introduced in LayerKit, affected code has been fixed.
+
+## 1.0.24
+
+### Enhancements
+
+* `ATLAddressBarController` now uses the `ATLParticipant` `displayName` property instead of `firstName` when displaying names in the `ATLAddressBarTextView`.
+
+## 1.0.23
+
+### Enhancements
+
+* Adds support for `CocoaPods` 1.0.0.
+* Bumps `LayerKit` version to `0.21.0`.
+
 ## 1.0.22
 
 ### Bug Fixes
