@@ -228,6 +228,7 @@ static NSInteger const ATLPhotoActionSheet = 1000;
     if (conversation) {
         [self fetchLayerMessages];
     } else {
+        self.conversationDataSource.queryController.delegate = nil;
         self.conversationDataSource = nil;
         [self.collectionView reloadData];
     }
@@ -256,7 +257,7 @@ static NSInteger const ATLPhotoActionSheet = 1000;
     }
     self.conversationDataSource.queryController.delegate = self;
     self.queryController = self.conversationDataSource.queryController;
-    self.showingMoreMessagesIndicator = NO;
+    self.showingMoreMessagesIndicator = [self.conversationDataSource moreMessagesAvailable];
     [self.collectionView reloadData];
 }
 
@@ -481,7 +482,7 @@ static NSInteger const ATLPhotoActionSheet = 1000;
     
     NSDate *date = message.sentAt ?: [NSDate date];
     NSTimeInterval interval = [date timeIntervalSinceDate:previousMessage.sentAt];
-    if (interval > self.dateDisplayTimeInterval) {
+    if (abs(interval) > self.dateDisplayTimeInterval) {
         return YES;
     }
     return NO;
@@ -593,13 +594,13 @@ static NSInteger const ATLPhotoActionSheet = 1000;
 - (void)messageInputToolbarDidType:(ATLMessageInputToolbar *)messageInputToolbar
 {
     if (!self.conversation) return;
-    [self.conversation sendTypingIndicator:LYRTypingDidBegin];
+    [self.conversation sendTypingIndicator:LYRTypingIndicatorActionBegin];
 }
 
 - (void)messageInputToolbarDidEndTyping:(ATLMessageInputToolbar *)messageInputToolbar
 {
     if (!self.conversation) return;
-    [self.conversation sendTypingIndicator:LYRTypingDidFinish];
+    [self.conversation sendTypingIndicator:LYRTypingIndicatorActionFinish];
 }
 
 #pragma mark - Message Sending
@@ -782,14 +783,12 @@ static NSInteger const ATLPhotoActionSheet = 1000;
     if (!self.conversation) return;
     if (!notification.object) return;
     if (![notification.object isEqual:self.conversation]) return;
-    
-    NSString *participantID = notification.userInfo[LYRTypingIndicatorParticipantUserInfoKey];
-    NSNumber *statusNumber = notification.userInfo[LYRTypingIndicatorValueUserInfoKey];
-    LYRTypingIndicator status = statusNumber.unsignedIntegerValue;
-    if (status == LYRTypingDidBegin) {
-        [self.typingParticipantIDs addObject:participantID];
+
+    LYRTypingIndicator *typingIndicator = notification.userInfo[LYRTypingIndicatorObjectUserInfoKey];
+    if (typingIndicator.action == LYRTypingIndicatorActionBegin) {
+        [self.typingParticipantIDs addObject:typingIndicator.sender.userID];
     } else {
-        [self.typingParticipantIDs removeObject:participantID];
+        [self.typingParticipantIDs removeObject:typingIndicator.sender.userID];
     }
     [self updateTypingIndicatorOverlay:YES];
 }
@@ -813,7 +812,7 @@ static NSInteger const ATLPhotoActionSheet = 1000;
     }
 }
 
-- (void)handleApplicationWillEnterForeground:(NSNotification *)notification
+- (void)handleApplicationDidBecomeActive:(NSNotification *)notification
 {
     if (self.conversation && self.marksMessagesAsRead) {
         NSError *error;
@@ -1163,9 +1162,9 @@ static NSInteger const ATLPhotoActionSheet = 1000;
     conversation = [self existingConversationWithParticipantIdentifiers:participantIdentifiers];
     if (conversation) return conversation;
     
-    BOOL deliveryReceiptsEnabled = participants.count <= 5;
-    NSDictionary *options = @{LYRConversationOptionsDeliveryReceiptsEnabledKey: @(deliveryReceiptsEnabled)};
-    conversation = [self.layerClient newConversationWithParticipants:participantIdentifiers options:options error:nil];
+    LYRConversationOptions *conversationOptions = [LYRConversationOptions new];
+    conversationOptions.deliveryReceiptsEnabled = participants.count <= 5;
+    conversation = [self.layerClient newConversationWithParticipants:participantIdentifiers options:conversationOptions error:nil];
     return conversation;
 }
 
@@ -1349,7 +1348,7 @@ static NSInteger const ATLPhotoActionSheet = 1000;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerClientObjectsDidChange:) name:LYRClientObjectsDidChangeNotification object:nil];
     
     // Application State Notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleApplicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleApplicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 @end

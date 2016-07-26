@@ -1,5 +1,67 @@
 # Atlas Changelog
 
+## 1.0.30
+
+### Enhancements
+
+* `ATLParticipantTableDataSet` is now mutable and observes changes to Identity objects and updates the associated `UITableView`. [APPS-2470]
+* Displays timestamps in `ATLConversationViewController` for groups of messages regardless of sorting. Messages sent first but displayed second will now show a timestamp. [APPS-2608]
+* Adds pagination capabilities to the `ATLConversationViewController` query controller. [APPS-2524]
+
+### Bug Fixes
+
+* Fixes a case in `ATLConversationViewController` where the query controller's delegate would not be unset.
+* Fixes a couple issues in `ATLConversationListViewController` where the query controller could be instantiated twice. [APPS-2598]
+* Fixes an issue where the "more messages" indicator would not initially appear in `ATLConversationViewController`.
+
+## 1.0.29
+
+### Bug Fixes
+
+* Fixes the build errors in the included Example classes.
+* Fixes a crash when updating the `ATLConversationListViewController` while the search bar is active. [APPS-2587]
+* Fixes an issue in iOS 9 where the list of conversations would briefly flash when returning from a view with an active keyboard. [APPS-2594]
+* Fixes an issue in the `ATLMessageInputToolbar` where adding a new line would result in text misalignment. [APPS-2593]
+
+## 1.0.28
+
+### Bug Fixes
+
+* Fixes an issue where messages in a new conversation would not appear until the conversation was reloaded.
+* Fixes a crash in the `ATLConversationListViewController` related to the query controller being initialized multiple times.
+* Fixes a crash when trying to get the avatar initials from a `LYRIdentity` object if it wasn't fully synced.
+
+## 1.0.27
+
+### Bug Fixes
+
+* Fixes the crash related to the new `LYRQueryController` behavior introduced in LayerKit v0.23.0. [APPS-2560]
+
+## 1.0.26
+
+### Bug Fixes
+
+* Fix of the conversation list query in the `ATLConversationListViewController`. [APPS-2506]
+
+## 1.0.25
+
+### Enhancements
+
+* Upgraded `LayerKit` to version `0.22.0`. Due to breaking API changes introduced in LayerKit, affected code has been fixed.
+
+## 1.0.24
+
+### Enhancements
+
+* `ATLAddressBarController` now uses the `ATLParticipant` `displayName` property instead of `firstName` when displaying names in the `ATLAddressBarTextView`.
+
+## 1.0.23
+
+### Enhancements
+
+* Adds support for `CocoaPods` 1.0.0.
+* Bumps `LayerKit` version to `0.21.0`.
+
 ## 1.0.22
 
 ### Bug Fixes
