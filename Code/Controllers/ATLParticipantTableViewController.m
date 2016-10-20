@@ -382,7 +382,7 @@ NSString *const ATLParticipantTableViewControllerTitle = @"Participants";
 
         // Perform the search again to update self.filteredDataSet
         if (self.searchController.isActive) {
-            [self searchDisplayController:self.searchController shouldReloadTableForSearchString:self.searchController.searchBar.text];
+//            [self searchDisplayController:self.searchController shouldReloadTableForSearchString:self.searchController.searchBar.text];
         }
     }
 }
