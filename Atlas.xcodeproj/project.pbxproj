@@ -156,9 +156,9 @@
 		7858B6551CE54BBE007795AB /* plus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7858B61E1CE54BBE007795AB /* plus@3x.png */; };
 		7858B6561CE54BBE007795AB /* plus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7858B61E1CE54BBE007795AB /* plus@3x.png */; };
 		7858B6571CE54BBE007795AB /* plus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7858B61E1CE54BBE007795AB /* plus@3x.png */; };
+		83B232D51DB8ED68000ACE10 /* LayerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250C5EF21C7656610084EB18 /* LayerKit.framework */; };
 		8F5A8821F40061D9FC6CBB4F /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1886043CF840E83E9A77B78B /* Pods_UnitTests.framework */; };
 		917DFA240CA4D2A4EFD8C2DF /* Pods_test_StoryboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62363A00A270318F0E8C0C38 /* Pods_test_StoryboardTests.framework */; };
-		95A744011D22A9D600BED68D /* LayerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A744001D22A9D600BED68D /* LayerKit.framework */; };
 		D0294DE71A93F37A00702856 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0294DE61A93F37A00702856 /* Info.plist */; };
 		D0294DE81A93F39300702856 /* ATLMediaStreamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0294DE41A93F37000702856 /* ATLMediaStreamTests.m */; };
 		D02CDCDB1A9FFC930013CBE8 /* ATLTestUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D02CDCDA1A9FFC930013CBE8 /* ATLTestUtilities.m */; };
@@ -247,7 +247,7 @@
 
 /* Begin PBXFileReference section */
 		1886043CF840E83E9A77B78B /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		250C5EF21C7656610084EB18 /* LayerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LayerKit.framework; path = Carthage/Build/iOS/LayerKit.framework; sourceTree = "<group>"; };
+		250C5EF21C7656610084EB18 /* LayerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LayerKit.framework; path = "../releases-ios/LayerKit.framework"; sourceTree = "<group>"; };
 		251C57AB1C5A9E3C00110871 /* ATLBaseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATLBaseCollectionViewCell.h; sourceTree = "<group>"; };
 		251C57AC1C5A9E3C00110871 /* ATLBaseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATLBaseCollectionViewCell.m; sourceTree = "<group>"; };
 		253C29A51C3C9D7100ED1549 /* Atlas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Atlas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -366,7 +366,6 @@
 		91A456BCEC404FC7F83EC216 /* Pods-Storyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Storyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-Storyboard/Pods-Storyboard.release.xcconfig"; sourceTree = "<group>"; };
 		921B2F42195B3C5F0569C57B /* Pods_Storyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Storyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		959F1869E1FC45A3651F40B6 /* Pods-test-StoryboardTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test-StoryboardTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-test-StoryboardTests/Pods-test-StoryboardTests.release.xcconfig"; sourceTree = "<group>"; };
-		95A744001D22A9D600BED68D /* LayerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LayerKit.framework; path = Pods/LayerKit/LayerKit.framework; sourceTree = "<group>"; };
 		98BF90733247F9CE21529791 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		A8E39A93868BE92F637098C5 /* Pods-test-StoryboardTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test-StoryboardTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-test-StoryboardTests/Pods-test-StoryboardTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B085A18188DCFC913F85665D /* Pods_Programmatic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Programmatic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -443,7 +442,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95A744011D22A9D600BED68D /* LayerKit.framework in Frameworks */,
+				83B232D51DB8ED68000ACE10 /* LayerKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,7 +632,6 @@
 		412524007C3A7505AC34F33C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				95A744001D22A9D600BED68D /* LayerKit.framework */,
 				250C5EF21C7656610084EB18 /* LayerKit.framework */,
 				5DE31FA9B1906CEA04D0C891 /* Pods.framework */,
 				B085A18188DCFC913F85665D /* Pods_Programmatic.framework */,
@@ -1669,6 +1667,7 @@
 					"$(inherited)",
 					"Carthage/Build/ios/**",
 					"$(PROJECT_DIR)/Pods/LayerKit",
+					"$(PROJECT_DIR)/../releases-ios",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1730,6 +1729,7 @@
 					"$(inherited)",
 					"Carthage/Build/ios/**",
 					"$(PROJECT_DIR)/Pods/LayerKit",
+					"$(PROJECT_DIR)/../releases-ios",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1884,6 +1884,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Checkouts/releases-ios";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1955,6 +1956,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Checkouts/releases-ios";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
