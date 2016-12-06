@@ -47,6 +47,8 @@ LYRConversation *LYRConversationDataSourceConversationFromPredicate(LYRPredicate
 @property (nonatomic, readwrite) LYRQueryController *queryController;
 @property (nonatomic, readwrite) BOOL expandingPaginationWindow;
 @property (nonatomic, readwrite) LYRConversation *conversation;
+@property (nonatomic) NSInteger messageCountBeforeSync;
+@property (nonatomic) BOOL shouldSynchronizeRemoteMessages;
 
 @end
 
@@ -82,6 +84,9 @@ NSInteger const ATLQueryControllerPaginationWindow = 30;
         
         BOOL success = [_queryController execute:&error];
         if (!success) NSLog(@"LayerKit failed to execute query with error: %@", error);
+        
+        _messageCountBeforeSync = _queryController.count;
+        _shouldSynchronizeRemoteMessages = YES;
     }
     return self;
 }
@@ -122,8 +127,14 @@ NSInteger const ATLQueryControllerPaginationWindow = 30;
         if (observer) {
             [[NSNotificationCenter defaultCenter] removeObserver:observer];
         }
+        if (weakSelf.queryController.count <= weakSelf.messageCountBeforeSync) {
+            weakSelf.shouldSynchronizeRemoteMessages = NO;
+        } else {
+            weakSelf.shouldSynchronizeRemoteMessages = YES;
+        }
         [weakSelf finishExpandingPaginationWindow];
     }];
+    self.messageCountBeforeSync = self.queryController.count;
     BOOL success = [self.conversation synchronizeMoreMessages:numberOfMessagesToSynchronize error:&error];
     if (!success) {
         if (observer) {
@@ -146,6 +157,14 @@ NSInteger const ATLQueryControllerPaginationWindow = 30;
 
 - (NSUInteger)messagesAvailableRemotely
 {
+    /*  Remote messages may exist in the conversation but are unavailable to the current user.
+        For example, they're marked as Deleted for that user.
+        `shouldSynchronizeRemoteMessages` is determined within `requestToSynchronizeMoreMessages`
+     */
+    if (!self.shouldSynchronizeRemoteMessages) {
+        return 0;
+    }
+    
     return (NSUInteger)MAX((NSInteger)0, (NSInteger)self.conversation.totalNumberOfMessages - (NSInteger)ABS(self.queryController.count));
 }
 
