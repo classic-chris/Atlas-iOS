@@ -523,6 +523,10 @@ static NSInteger const ATLPhotoActionSheet = 1000;
     if (self.conversation.participants.count <= 2) return NO;
     
     LYRMessage *message = [self.conversationDataSource messageAtCollectionViewSection:section];
+    if (![self.delegate messageSupportsDisplayOfSenderName: message]) {
+        return NO;
+    }
+    
     if ([message.sender.userID isEqualToString:self.layerClient.authenticatedUser.userID]) return NO;
     if (section > ATLNumberOfSectionsBeforeFirstMessageSection) {
         LYRMessage *previousMessage = [self.conversationDataSource messageAtCollectionViewSection:section - 1];
