@@ -99,6 +99,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable NSOrderedSet <LYRMessage*> *)conversationViewController:(ATLConversationViewController *)viewController messagesForMediaAttachments:(NSArray <ATLMediaAttachment*> *)mediaAttachments;
 
+// Plynk: Added delegate method to decide whether to show message based on message
+- (BOOL)messageSupportsDisplayOfSenderName:(LYRMessage *)message;
+
 @end
 
 ///---------------------------------------
@@ -297,6 +300,10 @@ NS_ASSUME_NONNULL_BEGIN
  @default 'ATLAvatarItemDisplayFrequencySection'.
  */
 @property (nonatomic) ATLAvatarItemDisplayFrequency avatarItemDisplayFrequency;
+
+
+// Plynk: Making method public
+- (BOOL)shouldDisplaySenderLabelForSection:(NSUInteger)section;
 
 @end
 NS_ASSUME_NONNULL_END
