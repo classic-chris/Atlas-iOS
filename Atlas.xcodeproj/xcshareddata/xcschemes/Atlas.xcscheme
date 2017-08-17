@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3DA2FABA1F1E9D9F00E890FA"
+               BlueprintIdentifier = "831725A41F45E1BF00E8609E"
                BuildableName = "Atlas.framework"
                BlueprintName = "Atlas"
                ReferencedContainer = "container:Atlas.xcodeproj">
@@ -26,6 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -36,6 +37,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -45,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3DA2FABA1F1E9D9F00E890FA"
+            BlueprintIdentifier = "831725A41F45E1BF00E8609E"
             BuildableName = "Atlas.framework"
             BlueprintName = "Atlas"
             ReferencedContainer = "container:Atlas.xcodeproj">
@@ -63,7 +65,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3DA2FABA1F1E9D9F00E890FA"
+            BlueprintIdentifier = "831725A41F45E1BF00E8609E"
             BuildableName = "Atlas.framework"
             BlueprintName = "Atlas"
             ReferencedContainer = "container:Atlas.xcodeproj">
